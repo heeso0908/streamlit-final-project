@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>여름 코딩 캠프 마케팅 카드</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .event-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 40px;
+    }
+
+    .event-title span {
+      color: #3b82f6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+    }
+
+    /* 블로그 카드 */
+    .card.blog { border-top: 5px solid #3b82f6; }
+    .card.blog .badge { background: #eff6ff; color: #3b82f6; }
+
+    /* 인스타 카드 */
+    .card.insta { border-top: 5px solid #ec4899; }
+    .card.insta .badge { background: #fdf2f8; color: #ec4899; }
+
+    /* 문자 카드 */
+    .card.sms { border-top: 5px solid #10b981; }
+    .card.sms .badge { background: #ecfdf5; color: #10b981; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+      width: fit-content;
+      letter-spacing: 0.04em;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .card-body {
+      font-size: 0.93rem;
+      color: #475569;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .highlight-box {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.9;
+    }
+
+    .highlight-box strong {
+      color: #1e293b;
+    }
+
+    .hashtags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hashtag {
+      background: #fdf2f8;
+      color: #ec4899;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .sms-bubble {
+      background: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      border-radius: 16px 16px 16px 4px;
+      padding: 18px 20px;
+      font-size: 0.95rem;
+      color: #065f46;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      text-align: right;
+      margin-top: -8px;
+    }
+
+    .copy-btn {
+      margin-top: auto;
+      padding: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .copy-btn:hover { opacity: 0.85; }
+
+    .card.blog .copy-btn { background: #3b82f6; color: #fff; }
+    .card.insta .copy-btn { background: #ec4899; color: #fff; }
+    .card.sms .copy-btn  { background: #10b981; color: #fff; }
+
+    .copied-msg {
+      display: none;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>학원 홍보 마케팅 카드</h1>
+  <p class="event-title">🌊 여름 코딩 캠프 <span>7.14 – 7.25</span></p>
+
+  <div class="grid">
+
+    <!-- 블로그 카드 -->
+    <div class="card blog">
+      <span class="badge">📝 블로그</span>
+      <div class="card-title">정보형 · 500자+</div>
+      <div class="card-body">이번 여름, 우리 아이 코딩 실력 확 올릴 기회! 여름 코딩 캠프 참가자 모집</div>
+      <div class="highlight-box">
+        <strong>📅 운영 일정</strong> 7월 14일(월) ~ 7월 25일(금) / 2주 집중 과정<br/>
+        <strong>🎯 대상</strong> 초등학생 · 중학생 (입문자 ~ 기초 경험자)<br/>
+        <strong>💡 특징</strong> 소수 정원, 체계적 커리큘럼, 실전 프로젝트<br/>
+        <strong>🎁 조기등록 혜택</strong> 수강료 20% 할인 + 교재 무료 제공
+      </div>
+      <div class="card-body">두 가지 혜택을 동시에 받을 수 있는 조기등록 기간은 한정되어 있습니다. 자리가 빠르게 마감되고 있으니, 지금 바로 문의 주세요. 여름방학이 끝날 때 아이의 달라진 모습을 함께 확인해 보세요!</div>
+      <button class="copy-btn" onclick="copyText('blog-text', this)">📋 텍스트 복사</button>
+      <span class="copied-msg">✅ 복사됐어요!</span>
+    </div>
+
+    <!-- 인스타 카드 -->
+    <div class="card insta">
+      <span class="badge">📸 인스타그램</span>
+      <div class="card-title">감성형 · 150자 이내</div>
+      <div class="card-body" style="font-size:1.05rem; font-weight:600; color:#1e293b; line-height:2">
+        이번 여름, 아이의 가능성이 코드로 피어납니다 ✨<br/>
+        7월 14~25일 여름 코딩 캠프 🖥️<br/>
+        조기등록하면 20% 할인 + 교재 무료!<br/>
+        자리 얼마 안 남았어요, 서둘러요 💙
+      </div>
+      <div class="hashtags">
+        <span class="hashtag">#여름코딩캠프</span>
+        <span class="hashtag">#초등코딩</span>
+        <span class="hashtag">#중학생코딩</span>
+        <span class="hashtag">#방학특강</span>
+        <span class="hashtag">#코딩교육</span>
+        <span class="hashtag">#학부모추천</span>
+        <span class="hashtag">#SW교육</span>
+      </div>
+      <button class="copy-btn" onclick="copyText('insta-text', this)">📋 텍스트 복사</button>
+      <span class="copied-msg">✅ 복사됐어요!</span>
+    </div>
+
+    <!-- 문자 카드 -->
+    <div class="card sms">
+      <span class="badge">💬 문자(SMS)</span>
+      <div class="card-title">핵심형 · 80자 이내</div>
+      <div class="sms-bubble" id="sms-text">
+        [여름코딩캠프] 7/14~25, 초·중학생 대상.<br/>조기등록 시 20%할인+교재무료!<br/>마감임박, 지금 바로 문의하세요 📞
+      </div>
+      <div class="char-count">✅ 약 56자</div>
+      <button class="copy-btn" onclick="copyText('sms-text', this)">📋 텍스트 복사</button>
+      <span class="copied-msg">✅ 복사됐어요!</span>
+    </div>
+
+  </div>
+
+  <!-- 숨겨진 복사용 텍스트 -->
+  <textarea id="blog-text" style="position:absolute;left:-9999px">[블로그 본문]
+
+이번 여름, 우리 아이 코딩 실력 확 올릴 기회! 여름 코딩 캠프 참가자 모집
+
+무더운 여름방학, 아이들에게 의미 있는 경험을 선물하고 싶으신가요? 올해 여름, 저희 학원에서 초·중학생을 대상으로 여름 코딩 캠프를 개최합니다.
+
+📅 운영 일정: 7월 14일(월) ~ 7월 25일(금) / 2주 집중 과정
+🎯 대상: 초등학생 · 중학생 (코딩 입문자 ~ 기초 경험자 모두 환영)
+
+💡 캠프 특징
+방학 동안 단기간에 코딩의 기초부터 실전 프로젝트까지 체계적으로 배울 수 있도록 커리큘럼을 구성했습니다. 강사 1인당 소수 정원으로 운영되어 아이 한 명 한 명에게 충분한 피드백이 돌아갑니다.
+
+🎁 조기등록 혜택
+- 수강료 20% 할인
+- 캠프 전용 교재 무료 제공
+
+두 가지 혜택을 동시에 받을 수 있는 조기등록 기간은 한정되어 있습니다. 자리가 빠르게 마감되고 있으니, 지금 바로 문의 주세요!</textarea>
+
+  <textarea id="insta-text" style="position:absolute;left:-9999px">이번 여름, 아이의 가능성이 코드로 피어납니다 ✨
+7월 14~25일 여름 코딩 캠프 🖥️
+조기등록하면 20% 할인 + 교재 무료!
+자리 얼마 안 남았어요, 서둘러요 💙
+
+#여름코딩캠프 #초등코딩 #중학생코딩 #방학특강 #코딩교육 #학부모추천 #SW교육</textarea>
+
+  <script>
+    function copyText(id, btn) {
+      const el = document.getElementById(id);
+      let text = '';
+      if (el.tagName === 'TEXTAREA') {
+        text = el.value;
+      } else {
+        text = el.innerText;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        const msg = btn.nextElementSibling;
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
