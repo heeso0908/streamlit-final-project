@@ -34,9 +34,24 @@ st.markdown("""
     background-color: #1A1A1A;
   }
   section[data-testid="stSidebar"] * { color: #FFFFFF !important; }
-  section[data-testid="stSidebar"] .stRadio label {
-    font-size: 14px;
-    font-weight: 500;
+
+  /* 탭 바 */
+  [data-testid="stTabs"] button {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #888888 !important;
+    padding: 10px 28px !important;
+    border-radius: 0 !important;
+    border-bottom: 3px solid transparent !important;
+  }
+  [data-testid="stTabs"] button[aria-selected="true"] {
+    color: #1A1A1A !important;
+    border-bottom: 3px solid #C9A84C !important;
+    background: transparent !important;
+  }
+  [data-testid="stTabs"] [role="tablist"] {
+    border-bottom: 1px solid #E0E0E0;
+    gap: 0;
   }
 
   /* 제목 */
@@ -107,16 +122,16 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     st.divider()
-    page = st.radio("페이지", ["오늘의 요약", "전체 피드백"], label_visibility="collapsed")
-    st.divider()
     st.caption(f"전체 {len(df)}건 수집")
     st.caption(f"불만 {len(complaints)}건 미처리")
     st.caption("Supabase · 60초 갱신")
 
 # ════════════════════════════
-# 요약 페이지
+# 탭 네비게이션
 # ════════════════════════════
-if page == "오늘의 요약":
+tab1, tab2 = st.tabs(["오늘의 요약", "전체 피드백"])
+
+with tab1:
     st.markdown("""
     <div style="margin-bottom:4px;">
       <span style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;">DAILY REPORT</span>
@@ -169,10 +184,7 @@ if page == "오늘의 요약":
   <span style="font-size:12px;color:#C9A84C;font-weight:600;">{star_str}</span>{badge}
 </div>""", unsafe_allow_html=True)
 
-# ════════════════════════════
-# 전체 피드백 페이지
-# ════════════════════════════
-else:
+with tab2:
     st.markdown("""
     <div style="margin-bottom:4px;">
       <span style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;">ALL FEEDBACK</span>
