@@ -98,9 +98,12 @@ top3 = complaints.sort_values("긴급도", ascending=False).head(3).reset_index(
 # ── 사이드바
 with st.sidebar:
     st.markdown("""
-    <div style="text-align:center;padding:28px 0 20px;">
-      <div style="font-size:13px;letter-spacing:3px;color:#C9A84C;font-weight:700;">TWOSOME PLACE</div>
-      <div style="font-size:11px;color:#888;margin-top:6px;letter-spacing:1px;">FEEDBACK DASHBOARD</div>
+    <div style="text-align:center;padding:32px 0 24px;">
+      <div style="font-size:22px;letter-spacing:4px;color:#C9A84C;font-weight:700;line-height:1.3;">
+        TWOSOME<br>PLACE
+      </div>
+      <div style="width:40px;height:2px;background:#C9A84C;margin:12px auto;"></div>
+      <div style="font-size:10px;color:#888;letter-spacing:2px;">FEEDBACK DASHBOARD</div>
     </div>
     """, unsafe_allow_html=True)
     st.divider()
