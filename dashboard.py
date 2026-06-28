@@ -17,41 +17,47 @@ def get_secret(key):
     except Exception:
         return os.environ.get(key)
 
-st.set_page_config(page_title="Brew & Bean · 고객 피드백", layout="wide")
+st.set_page_config(page_title="Twosome · 고객 피드백", layout="wide")
 
-# ── 전역 스타일
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
   html, body, [class*="css"] {
-    background-color: #FBF7F2;
+    background-color: #F5F5F5;
     font-family: 'Noto Sans KR', sans-serif;
-    color: #3B2314;
+    color: #1A1A1A;
   }
+
   /* 사이드바 */
   section[data-testid="stSidebar"] {
-    background-color: #2C1A0E;
+    background-color: #1A1A1A;
   }
-  section[data-testid="stSidebar"] * {
-    color: #E8D5B7 !important;
-  }
+  section[data-testid="stSidebar"] * { color: #FFFFFF !important; }
   section[data-testid="stSidebar"] .stRadio label {
-    font-size: 15px;
-    padding: 6px 0;
+    font-size: 14px;
+    font-weight: 500;
   }
+
   /* 제목 */
-  h1 { font-family: 'Playfair Display', serif !important; color: #2C1A0E !important; }
-  h2, h3 { font-family: 'Playfair Display', serif !important; color: #4A2C2A !important; }
+  h1 { font-size: 28px !important; font-weight: 700 !important; color: #1A1A1A !important; letter-spacing: -0.5px; }
+  h2, h3 { font-weight: 600 !important; color: #1A1A1A !important; }
+
   /* metric */
-  [data-testid="stMetricValue"] { color: #6F4E37 !important; font-size: 2rem !important; font-weight: 700 !important; }
-  [data-testid="stMetricLabel"] { color: #9E7B5A !important; font-size: 13px !important; }
+  [data-testid="stMetricValue"] { color: #1A1A1A !important; font-size: 2rem !important; font-weight: 700 !important; }
+  [data-testid="stMetricLabel"] { color: #666666 !important; font-size: 13px !important; }
+  [data-testid="metric-container"] {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px 24px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
   /* divider */
-  hr { border-color: #D4B896 !important; }
+  hr { border-color: #E0E0E0 !important; }
+
   /* dataframe */
-  [data-testid="stDataFrame"] { border-radius: 12px; overflow: hidden; }
-  /* multiselect */
-  [data-testid="stMultiSelect"] > div { border-color: #C8A96E !important; border-radius: 8px; }
+  [data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; border: 1px solid #E0E0E0; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -92,33 +98,29 @@ top3 = complaints.sort_values("긴급도", ascending=False).head(3).reset_index(
 # ── 사이드바
 with st.sidebar:
     st.markdown("""
-    <div style="text-align:center;padding:24px 0 12px;">
-      <div style="font-size:32px;">☕</div>
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
-                  color:#E8D5B7;letter-spacing:1px;">Brew & Bean</div>
-      <div style="font-size:11px;color:#9E7B5A;margin-top:4px;">Customer Feedback</div>
+    <div style="text-align:center;padding:28px 0 20px;">
+      <div style="font-size:13px;letter-spacing:3px;color:#C9A84C;font-weight:700;">TWOSOME PLACE</div>
+      <div style="font-size:11px;color:#888;margin-top:6px;letter-spacing:1px;">FEEDBACK DASHBOARD</div>
     </div>
     """, unsafe_allow_html=True)
     st.divider()
-    page = st.radio("페이지", ["☕  오늘의 요약", "📋  전체 피드백"], label_visibility="collapsed")
+    page = st.radio("페이지", ["오늘의 요약", "전체 피드백"], label_visibility="collapsed")
     st.divider()
     st.caption(f"전체 {len(df)}건 수집")
     st.caption(f"불만 {len(complaints)}건 미처리")
     st.caption("Supabase · 60초 갱신")
 
-# ════════════════════════════════════════
+# ════════════════════════════
 # 요약 페이지
-# ════════════════════════════════════════
-if page == "☕  오늘의 요약":
+# ════════════════════════════
+if page == "오늘의 요약":
     st.markdown("""
-    <div style="padding: 8px 0 4px;">
-      <span style="font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:#2C1A0E;">
-        오늘의 피드백 요약
-      </span><br>
-      <span style="font-size:14px;color:#9E7B5A;">가장 급한 불만을 빠르게 확인하세요</span>
+    <div style="margin-bottom:4px;">
+      <span style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;">DAILY REPORT</span>
     </div>
     """, unsafe_allow_html=True)
-
+    st.title("오늘의 불만 요약")
+    st.caption("가장 먼저 처리해야 할 피드백을 확인하세요")
     st.divider()
 
     c1, c2, c3 = st.columns(3)
@@ -129,56 +131,52 @@ if page == "☕  오늘의 요약":
     st.divider()
 
     st.markdown("""
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;
-                color:#4A2C2A;margin-bottom:4px;">가장 급한 불만 TOP 3</div>
-    <div style="font-size:12px;color:#9E7B5A;margin-bottom:20px;">
-      긴급도 = 별점 점수 + 금전(+5) · 운영 장애(+2) · 시설(+1)
-    </div>
+    <div style="font-size:16px;font-weight:700;color:#1A1A1A;margin-bottom:4px;">가장 급한 불만 TOP 3</div>
+    <div style="font-size:12px;color:#888;margin-bottom:20px;">긴급도 = 별점 점수 + 금전(+5) · 운영 장애(+2) · 시설(+1)</div>
     """, unsafe_allow_html=True)
 
-    rank_labels = ["1순위", "2순위", "3순위"]
-    border_colors = ["#6F4E37", "#9E7B5A", "#C8A96E"]
-    bg_colors     = ["#FFF8F0", "#FBF5EE", "#FAF3E8"]
+    rank_labels   = ["01", "02", "03"]
+    accent_colors = ["#1A1A1A", "#3D3D3D", "#666666"]
 
     for i, row in top3.iterrows():
         star_raw = pd.to_numeric(row["별점"], errors="coerce")
-        star_str = "★" * int(star_raw) + "☆" * (5 - int(star_raw)) if pd.notna(star_raw) else "별점 없음"
+        star_str = f"★ {int(star_raw)}점" if pd.notna(star_raw) else "별점 없음"
         score    = int(row["긴급도"])
         badge    = (
-            "<span style='background:#C8A96E;color:#2C1A0E;border-radius:20px;"
-            "padding:2px 10px;font-size:11px;font-weight:600;margin-left:8px;'>개선 요청 포함</span>"
+            "<span style='background:#C9A84C;color:#1A1A1A;border-radius:4px;"
+            "padding:2px 10px;font-size:11px;font-weight:700;margin-left:8px;'>"
+            "개선 요청 포함</span>"
             if str(row.get("부유형", "")).strip() == "요청" else ""
         )
         st.markdown(f"""
-<div style="border-left:5px solid {border_colors[i]};background:{bg_colors[i]};
-            border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:16px;
-            box-shadow:0 2px 8px rgba(111,78,55,0.08);">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-    <span style="font-size:12px;font-weight:700;color:{border_colors[i]};
-                 text-transform:uppercase;letter-spacing:1px;">{rank_labels[i]}</span>
-    <span style="font-size:11px;color:#B09070;">
+<div style="background:#FFFFFF;border-radius:10px;padding:20px 24px;margin-bottom:14px;
+            box-shadow:0 1px 4px rgba(0,0,0,0.08);
+            border-top:3px solid {accent_colors[i]};">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+    <span style="font-size:22px;font-weight:700;color:{accent_colors[i]};letter-spacing:-1px;">
+      {rank_labels[i]}
+    </span>
+    <span style="font-size:11px;color:#999;">
       긴급도 {score}점 &nbsp;·&nbsp; {row['받은날짜']} &nbsp;·&nbsp; {row['경로']}
     </span>
   </div>
-  <p style="font-size:15px;font-weight:500;color:#2C1A0E;margin:0 0 8px;line-height:1.6;">
-    "{row['내용']}"
+  <p style="font-size:15px;font-weight:500;color:#1A1A1A;margin:0 0 10px;line-height:1.7;">
+    {row['내용']}
   </p>
-  <span style="font-size:13px;color:#C8A96E;">{star_str}</span>{badge}
+  <span style="font-size:12px;color:#C9A84C;font-weight:600;">{star_str}</span>{badge}
 </div>""", unsafe_allow_html=True)
 
-# ════════════════════════════════════════
+# ════════════════════════════
 # 전체 피드백 페이지
-# ════════════════════════════════════════
+# ════════════════════════════
 else:
     st.markdown("""
-    <div style="padding: 8px 0 4px;">
-      <span style="font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:#2C1A0E;">
-        전체 피드백
-      </span><br>
-      <span style="font-size:14px;color:#9E7B5A;">수집된 모든 고객 의견을 확인하세요</span>
+    <div style="margin-bottom:4px;">
+      <span style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;">ALL FEEDBACK</span>
     </div>
     """, unsafe_allow_html=True)
-
+    st.title("전체 피드백")
+    st.caption("수집된 모든 고객 의견을 확인하세요")
     st.divider()
 
     counts = df["유형"].value_counts()
@@ -192,51 +190,58 @@ else:
 
     left, right = st.columns(2)
 
+    CHART_BG = "#FFFFFF"
+    AXIS_COLOR = "#999999"
+    GRID_COLOR = "#EEEEEE"
+
     with left:
-        st.markdown("<div style='font-family:Playfair Display,serif;font-size:18px;font-weight:600;color:#4A2C2A;margin-bottom:8px;'>유형별 건수</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:8px;'>유형별 건수</div>", unsafe_allow_html=True)
         type_df = counts.reset_index()
         type_df.columns = ["유형", "건수"]
-        color_map = {"불만": "#8B4513", "요청": "#C8A96E", "칭찬": "#7A9E6E", "문의": "#7A8FA6"}
+        color_map = {"불만": "#1A1A1A", "요청": "#C9A84C", "칭찬": "#4A7C59", "문의": "#6B8CAE"}
         chart = (
             alt.Chart(type_df)
-            .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6)
+            .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4)
             .encode(
-                x=alt.X("유형:N", sort="-y", axis=alt.Axis(labelFontSize=13, labelColor="#4A2C2A", tickColor="#D4B896", domainColor="#D4B896")),
-                y=alt.Y("건수:Q", axis=alt.Axis(tickMinStep=1, labelColor="#9E7B5A", gridColor="#EDE0D0", domainColor="#D4B896")),
+                x=alt.X("유형:N", sort="-y",
+                        axis=alt.Axis(labelFontSize=13, labelColor="#1A1A1A",
+                                      tickColor=GRID_COLOR, domainColor=GRID_COLOR, labelAngle=0)),
+                y=alt.Y("건수:Q",
+                        axis=alt.Axis(tickMinStep=1, labelColor=AXIS_COLOR,
+                                      gridColor=GRID_COLOR, domainColor=GRID_COLOR)),
                 color=alt.Color("유형:N",
                     scale=alt.Scale(domain=list(color_map.keys()), range=list(color_map.values())),
                     legend=None),
                 tooltip=["유형", "건수"],
             )
-            .properties(height=260, background="#FBF7F2")
-            .configure_view(strokeOpacity=0)
+            .properties(height=260, background=CHART_BG)
+            .configure_view(stroke=GRID_COLOR, strokeWidth=1)
         )
         st.altair_chart(chart, use_container_width=True)
 
     with right:
-        st.markdown("<div style='font-family:Playfair Display,serif;font-size:18px;font-weight:600;color:#4A2C2A;margin-bottom:8px;'>감정 분포</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:8px;'>감정 분포</div>", unsafe_allow_html=True)
         sent_df = df["감정"].value_counts().reset_index()
         sent_df.columns = ["감정", "건수"]
-        sent_color = {"긍정": "#7A9E6E", "부정": "#8B4513", "중립": "#C8A96E"}
+        sent_color = {"긍정": "#4A7C59", "부정": "#1A1A1A", "중립": "#C9A84C"}
         pie = (
             alt.Chart(sent_df)
-            .mark_arc(innerRadius=60, outerRadius=105)
+            .mark_arc(innerRadius=65, outerRadius=110)
             .encode(
                 theta=alt.Theta("건수:Q"),
                 color=alt.Color("감정:N",
                     scale=alt.Scale(domain=list(sent_color.keys()), range=list(sent_color.values())),
-                    legend=alt.Legend(labelColor="#4A2C2A", titleColor="#4A2C2A")),
+                    legend=alt.Legend(labelColor="#1A1A1A", labelFontSize=13)),
                 tooltip=["감정", "건수"],
             )
-            .properties(height=260, background="#FBF7F2")
-            .configure_view(strokeOpacity=0)
+            .properties(height=260, background=CHART_BG)
+            .configure_view(stroke=GRID_COLOR, strokeWidth=1)
         )
         st.altair_chart(pie, use_container_width=True)
 
     st.divider()
 
-    st.markdown("<div style='font-family:Playfair Display,serif;font-size:18px;font-weight:600;color:#4A2C2A;margin-bottom:12px;'>피드백 목록</div>", unsafe_allow_html=True)
-
+    st.markdown("<div style='font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:12px;'>피드백 목록</div>", unsafe_allow_html=True)
     col_f1, col_f2 = st.columns(2)
     with col_f1:
         filter_type = st.multiselect("유형 필터", ["불만", "요청", "칭찬", "문의"],
@@ -248,6 +253,6 @@ else:
     filtered = df[df["유형"].isin(filter_type) & df["감정"].isin(filter_sent)]
     display = filtered[["id", "받은날짜", "경로", "별점", "유형", "감정", "부유형", "내용"]].copy()
     display["별점"] = display["별점"].apply(
-        lambda x: f"★{int(float(x))}" if pd.notna(x) and str(x).strip() not in ("", "nan") else "-"
+        lambda x: f"★ {int(float(x))}" if pd.notna(x) and str(x).strip() not in ("", "nan") else "-"
     )
     st.dataframe(display, use_container_width=True, hide_index=True)
