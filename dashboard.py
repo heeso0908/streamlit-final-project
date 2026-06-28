@@ -136,7 +136,7 @@ if page == "오늘의 요약":
     """, unsafe_allow_html=True)
 
     rank_labels   = ["01", "02", "03"]
-    accent_colors = ["#1A1A1A", "#3D3D3D", "#666666"]
+    accent_colors = ["#C0392B", "#E74C3C", "#E57373"]
 
     for i, row in top3.iterrows():
         star_raw = pd.to_numeric(row["별점"], errors="coerce")
