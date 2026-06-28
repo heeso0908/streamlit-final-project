@@ -2,16 +2,25 @@ import os
 import streamlit as st
 import pandas as pd
 from datetime import date
-from dotenv import load_dotenv
 from supabase import create_client
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+def get_secret(key):
+    try:
+        return st.secrets[key]
+    except Exception:
+        return os.environ.get(key)
 
 st.set_page_config(page_title="불만 모니터링", layout="centered")
 
 @st.cache_data(ttl=60)
 def load_data():
-    sb = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
+    sb = create_client(get_secret("SUPABASE_URL"), get_secret("SUPABASE_KEY"))
     res = sb.table("feedback").select("*").execute()
     return pd.DataFrame(res.data)
 
