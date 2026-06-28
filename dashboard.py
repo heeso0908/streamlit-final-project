@@ -198,7 +198,7 @@ else:
         st.markdown("<div style='font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:8px;'>유형별 건수</div>", unsafe_allow_html=True)
         type_df = counts.reset_index()
         type_df.columns = ["유형", "건수"]
-        color_map = {"불만": "#1A1A1A", "요청": "#C9A84C", "칭찬": "#4A7C59", "문의": "#6B8CAE"}
+        color_map = {"불만": "#C0392B", "요청": "#C9A84C", "칭찬": "#4A7C59", "문의": "#6B8CAE"}
         chart = (
             alt.Chart(type_df)
             .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4)
@@ -223,7 +223,7 @@ else:
         st.markdown("<div style='font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:8px;'>감정 분포</div>", unsafe_allow_html=True)
         sent_df = df["감정"].value_counts().reset_index()
         sent_df.columns = ["감정", "건수"]
-        sent_color = {"긍정": "#4A7C59", "부정": "#1A1A1A", "중립": "#C9A84C"}
+        sent_color = {"긍정": "#4A7C59", "부정": "#C0392B", "중립": "#C9A84C"}
         pie = (
             alt.Chart(sent_df)
             .mark_arc(innerRadius=65, outerRadius=110)
